@@ -20,7 +20,8 @@ for (i in 1:30){
 }
 W3 = W3/30
 
-image(W3, axes = FALSE)
+par(mfrow = c(1,1), mar = c(0, 0, 0, 0))
+plot_dig(W3)
 
 W8 = matrix(0, 16, 16)
 for (i in 1:30){
@@ -28,7 +29,8 @@ for (i in 1:30){
 }
 W8 = W8/30
 
-image(W8)
+par(mfrow = c(1,1), mar = c(0, 0, 0, 0))
+plot_dig(W8)
 
 #Rotate the data for the 3s so that it lines up with the 8s more closely
 rotate_180 = function(matrix) {
@@ -38,21 +40,18 @@ rotate_180 = function(matrix) {
 }
 
 W3 = rotate_180(W3)
-image(W3)
+par(mfrow = c(1,1), mar = c(0, 0, 0, 0))
+plot_dig(W3)
 
 W.combine = (W8 + W3)/2
-image(W.combine, axes = FALSE)
+par(mfrow = c(1,1), mar = c(0, 0, 0, 0))
+plot_dig(W.combine)
 
 W.difference = abs(W8 - W3)
 image(W8, axes = FALSE)
 image(W3, axes = FALSE)
-image(W.difference, axes = FALSE)
-
-par(mfrow = c(2, 2), mar = c(3, 3, 3, 3))
-image(W8, main = "Average of the 8s", axes = FALSE)
-image(W3, main = "Average of the 3s, basis 1", axes = FALSE)
-image(W.combine, main = "Average of the 8s and 3s", axes = FALSE)
-image(W.difference, main = "Average of the 8s minus the 3s, basis 2", axes = FALSE)
+par(mfrow = c(1,1), mar = c(0, 0, 0, 0))
+plot_dig(W.difference)
 
 #for W we need to resize the image matrices so they're both 16**2 in length,
 #and then bind them together as a 16**2 by 2 matrix
@@ -65,9 +64,9 @@ W = cbind(W.basis.1, W.basis.2)
 #do the same for the data (do this later) 
 
 #Wh = x
-par(mfrow = c(1, 1))
+par(mfrow = c(1,1), mar = c(0, 0, 0, 0))
 x = rotate_180(X.array3[, , 1])
-image(x, axes=FALSE) #printing x as an image
+plot_dig(x) #printing x as an image
 x = as.vector(x)
 
 h = NNLS(W, x, 1.0e-7)
@@ -75,13 +74,15 @@ h = NNLS(W, x, 1.0e-7)
 #print Wh as an image
 Wh = W%*%h
 Wh = matrix(Wh, 16, 16)
-image(Wh, axes=FALSE)
+par(mfrow = c(1,1), mar = c(0, 0, 0, 0))
+plot_dig(Wh)
 
 #Try the same for an 8
 #Wh = x
 par(mfrow = c(1, 1))
 x = X.array8[, , 1]
-image(x, axes=FALSE) #printing x as an image
+par(mfrow = c(1,1), mar = c(0, 0, 0, 0))
+plot_dig(x) #printing x as an image
 x = as.vector(x)
 
 h = NNLS(W, x, 1.0e-7)
@@ -89,9 +90,10 @@ h = NNLS(W, x, 1.0e-7)
 #print Wh as an image
 Wh = W%*%h
 Wh = matrix(Wh, 16, 16)
-image(Wh, axes=FALSE)
+par(mfrow = c(1,1), mar = c(0, 0, 0, 0))
+plot_dig(Wh)
 
-par(mfrow = c(1, 2), mar = c(0.5, 0.5, 0, 0.5))
-image(W3, axes=FALSE)
-image(W.difference, axes=FALSE)
+par(mfrow = c(1, 2), mar = c(0.1, 0.1, 0.1, 0.1), bg="black")
+plot_dig(W3)
+plot_dig(W.difference)
 
