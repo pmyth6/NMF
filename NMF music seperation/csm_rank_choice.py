@@ -11,9 +11,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.decomposition import NMF
 
-#Set the basis
-n_components = 6
-
 #Load the audio file
 audio_file = '/Users/theahellen/Documents/Uni/Year 4/Statistical Machine Learning/NMF/NMF music seperation/crepuscolo_sul_mare_chunk.wav'
 y, sr = librosa.load(audio_file, sr=None)  # y = audio signal, sr = sample rate
@@ -30,7 +27,7 @@ magnitude, _ = librosa.magphase(D)
 DB = librosa.amplitude_to_db(magnitude, ref=np.max)
 
 #Knowing that the max of DB is 0 and the min is -80, convert to non-negative data
-DB = np.abs(DB)
+DB = DB+80
 
 #Plot the spectrogram (frequency over time)
 plt.figure(figsize=(10, 6))
