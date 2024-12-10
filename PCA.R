@@ -1,11 +1,14 @@
 load("zipCodeAllDigits.RData")
 library(NMF)
+
 col = hcl.colors(1000, "blue-red", rev = FALSE)
+
 
 flip_horizontal <- function(img_matrix) {
   flipped_matrix <- img_matrix[, ncol(img_matrix):1]
   return(flipped_matrix)
 }
+
 
 x = train.X
 tx = t(train.X)
@@ -43,6 +46,7 @@ for (i in 1:25){
   #neg[neg>0] = NA
   image(print.eg, axes=FALSE, add=FALSE, col = hcl.colors(1000, "blue-red", rev = FALSE)) #, col=pos_cols)
   #image(neg, axes=FALSE, add=TRUE, col=neg_cols)
+
   print.x=matrix(x[,i], 16, 16)
   print.x = flip_horizontal(print.x)
   image(print.x, axes=FALSE) #, col=pos_cols)

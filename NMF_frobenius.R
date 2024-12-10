@@ -1,4 +1,6 @@
+
 r = 20
+
 load("zipCodeAllDigits.RData")
 library(NMF)
 
@@ -16,9 +18,11 @@ print.x = flip_horizontal(print.x)
 par(mfrow = c(1,1), mar = c(1, 1, 1, 1))
 image(print.x, axes=FALSE)
 
+
 result = nmf(x, r, "Frobenius")
-par(mfrow = c(16, 16), mar = c(0.1, 0.1, 0.1, 0.1), bg="black")
-for (i in 1:256){
+
+par(mfrow = c(2, 10), mar = c(0.1, 0.1, 0.1, 0.1), bg="black")
+for (i in 1:r){
   print.w.1 = matrix(result@fit@W[,i], 16, 16)
   print.w.1 = flip_horizontal(print.w.1)
   
@@ -37,6 +41,7 @@ for (i in 1:25){
 
 
 
+
 par(mfrow = c(1,2), mar = c(1, 1, 1, 1), bg="white")
 for (i in 11:11){
   approx = result@fit@W %*% result@fit@H[, i]
@@ -45,8 +50,5 @@ for (i in 11:11){
   image(p.approx, axes=FALSE)
   image(flip_horizontal(matrix(x[,i], 16, 16)), axes=FALSE)
 }
-
-
-
 
 
