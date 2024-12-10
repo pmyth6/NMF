@@ -14,7 +14,9 @@ par(mfrow = c(1,1), mar = c(1, 1, 1, 1))
 image(print.x, axes=FALSE)
 
 result = nmf((x+1)/2, 10)
-par(mfrow = c(2, 5), mar = c(0.5, 0.5, 0, 0.5))
+
+par(mfrow = c(2, 5), mar = c(0.1, 0.1, 0.1, 0.1), bg="black")
+
 for (i in 1:10){
   print.w.1 = matrix(result@fit@W[,i], 16, 16)
   print.w.1 = flip_horizontal(print.w.1)
